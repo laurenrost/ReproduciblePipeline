@@ -5,10 +5,10 @@
 require(lubridate)
 
 # Load file with the depression ICD codes associated with each patients' record.
-filepath1 <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/3_DepressionCodes_210223_4.csv"
+filepath1 <- "~/3_DepressionCodes.csv"
 mdd_codes <- read.csv(filepath1)
 # Load file with the depression ICD code dates associated with each patients' record.
-filepath2 <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/3_DepressionDates_210223_4.csv"
+filepath2 <- "~/3_DepressionDates.csv"
 mdd_codes_dates <- read.csv(filepath2, header=T, sep=",")
 
 # Label the column names of the ICD code file
@@ -3024,15 +3024,10 @@ for (i in seq_along(1:dim(mdd_codes)[1])){
 
 }
 
-write.csv(mdd_codes_ordered, file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/7_ICDCodes_Ordered_210225.csv", row.names=F)
-write.csv(mdd_codes_dates_ordered, file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/7_ICDCodesDates_Ordered_210225.csv", row.names=F)
+write.csv(mdd_codes_ordered, file="~/7_ICDCodes_Ordered.csv", row.names=F)
+write.csv(mdd_codes_dates_ordered, file="~/7_ICDCodesDates_Ordered.csv", row.names=F)
 
-# Load in the files that were just created
-filepath <- ("~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/7_ICDCodes_Ordered_210225.csv")
-icd_codes_ordered <- read.csv(filepath)
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/7_ICDCodesDates_Ordered_210225.csv"
-icd_codes_dates_ordered <- read.csv(filepath)
 
 # Create a file that holds each patients' first ICD code associated with their EHR.
 firsticd <- icd_codes_ordered[,2:3]
-write.csv(firsticd, file = "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/8_Feature_FirstICD_210225.csv", row.names=F)
+write.csv(firsticd, file = "~/8_Feature_FirstICD_210225.csv", row.names=F)
