@@ -1,7 +1,7 @@
 require(lubridate)
-filepath <-"~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/7_AntidepressantDrugs_Ordered_210212.csv"
+filepath <-"~/7_AntidepressantDrugs_Ordered.csv"
 ordered_drugs <- read.csv(filepath)
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/7_AntidepressantDates_Ordered_210212.csv"
+filepath <- "~/7_AntidepressantDates_Ordered.csv"
 ordered_dates <- read.csv(filepath)
 
 # Remove first column that had "X" 
@@ -65,7 +65,7 @@ for (i in seq_along(1:dim(outcome_matrix)[1])){
 }
 
 # Write the outcome matrix 
-write.csv(outcome_matrix, file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/8_OutcomeLabels_210217_12Weeks.csv", row.names=F)
+write.csv(outcome_matrix, file="~/8_OutcomeLabels_12Weeks.csv", row.names=F)
 
 # Turn each column into numeric values 
 numeric_outcome_matrix <- matrix(0, nrow=dim(outcome_matrix)[1], ncol=4)
@@ -76,5 +76,5 @@ numeric_outcome_matrix[,4] <- as.numeric(outcome_matrix[,8])
 numeric_outcome_matrix[,1] <- as.numeric(outcome_matrix[,1])
 
 # Write the outcome matrix with numeric columns
-write.csv(numeric_outcome_matrix, file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/8_NumericOutcomeLabels_210217_12Weeks.csv", row.names=F)
+write.csv(numeric_outcome_matrix, file="~/8_NumericOutcomeLabels_12Weeks.csv", row.names=F)
 
