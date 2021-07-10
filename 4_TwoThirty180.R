@@ -4,7 +4,7 @@
 #                                           and no more than 180 days apart
 
 # Input date file
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/3_DepressionDates_210223_4.csv"
+filepath <- "~/3_DepressionDates.csv"
 eMERGE_STUDYIDs_dates <- read.csv(filepath, header=T)
 
 # Create matrix for data collection
@@ -46,13 +46,13 @@ for (i in seq_along(1:dim(eMERGE_STUDYIDs_dates)[1])){
 }
 # Write file that collects whether patients pass or fail the 2/30/180 rule
 write.csv(pass_fail_230180rule,  
-            file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/4_TwoThirty180_PassFail_210527.csv", 
+            file="~/4_TwoThirty180_PassFail.csv", 
             sep=',', 
             row.names=F, 
             col.names=F )
 # Write file that collects the time intervals between ICD-9/-10 codes that are closest to 30 days and 180 days for patients that fail the 2/30/180 rule 
 write.csv(failed_230180rule_intervals,  
-          file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/4_Failed_TwoThirty180_Intervals_210527.csv", 
+          file="~/4_Failed_TwoThirty180_Intervals.csv", 
           sep=',', 
           row.names=F, 
           col.names=F )
