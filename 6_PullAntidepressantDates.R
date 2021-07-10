@@ -2,17 +2,16 @@
 
 # Input: the output of 5_PullAntidepressants.v4.R
 library("lubridate")
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/EHR/R3_2027_ROST_MED_ORDERS_2020_12_14.csv"
+filepath <- "~/MED_ORDERS.csv"
 w <- read.csv(filepath)
 
 # Pull in the patients that passed the 2/30/180 rule
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/4_TwoThirty180_PassFail_210208.csv"
+filepath <- "~/4_TwoThirty180_PassFail.csv"
 eMERGE_STUDYIDs <- read.csv(filepath)
 eMERGE_STUDYIDs_2 <- eMERGE_STUDYIDs[(which(eMERGE_STUDYIDs[,2]==1)),1]
 
 # Input the drug list (with or without tentatives)
-checkdrugpresence <- read.csv("~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/5_TotalAntidepressantPresenceAcrossPatients_nozeros_210426.csv")
-checkdrugpresence <- read.csv("~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/5_TotalAntidepressantPresenceAcrossPatients_withtentatives_nozeros_210426.csv")
+checkdrugpresence <- read.csv("~/5_TotalAntidepressantPresenceAcrossPatients.csv")
 incl_meds <- checkdrugpresence[,1]
 
 # Make a matrix to output antidepressant ordered
@@ -30,7 +29,7 @@ filteredw <- w[which(w$STUDY_ID %in% rownames(drugs)),]
 filteredw[,4] <- as.character(filteredw[,4])
 
 # Pull in file that has the patients that were prescribed antidepressants
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/5_AntidepressantPresence_210426.csv"
+filepath <- "~/5_AntidepressantPresence.csv"
 mdd_drugs <- read.csv(filepath, header=T)
 
 eMERGE_STUDYIDs_2 <- data.frame(mdd_drugs)
@@ -1578,14 +1577,14 @@ for (i in seq_along(1:dim(eMERGE_STUDYIDs_2)[1])){
   if (i==1){
     # Create table that holds the dates of antidepressants that patients were prescribed.
     write.table(mdd_dates_append,  
-                file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/6_AntidepressantDates_withtentatives_210427.csv",
+                file="~/6_AntidepressantDates.csv",
                 sep=",",
                 append=F,
                 col.names = T,
                 row.names=F)
     # Create table that holds the antidepressants that patients were prescribed.
     write.table(mdd_drugs_append,  
-                file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/6_AntidepressantDrugs_withtentatives_210427.csv",
+                file="~/6_AntidepressantDrugs.csv",
                 sep=",",
                 append=F,
                 col.names = T,
@@ -1593,14 +1592,14 @@ for (i in seq_along(1:dim(eMERGE_STUDYIDs_2)[1])){
   } else {
     # Append to the table that holds the dates of antidepressants that patients were prescribed.
     write.table(mdd_dates_append,  
-                file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/6_AntidepressantDates_withtentatives_210427.csv", 
+                file="~/6_AntidepressantDates.csv", 
                 append = T, 
                 sep=',', 
                 row.names=F, 
                 col.names=F )
     # Append to the table that holds the antidepressants that patients were prescribed.
     write.table(mdd_drugs_append,  
-                file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/6_AntidepressantDrugs_withtentatives_210427.csv", 
+                file="~/6_AntidepressantDrugs.csv", 
                 append = T, 
                 sep=',', 
                 row.names=F, 
