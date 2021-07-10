@@ -3,17 +3,17 @@
 # file that holds the dates for each prescription.
 
 require(lubridate)
-filepath1 <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/6_AntidepressantDrugs_withtentatives_210427.csv"
+filepath1 <- "~/6_AntidepressantDrugs.csv"
 mdd_drugs <- read.csv(filepath1)
-filepath2 <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/6_AntidepressantDates_withtentatives_210427.csv"
+filepath2 <- "~/6_AntidepressantDates.csv"
 mdd_dates <- read.csv(filepath2, header=T, sep=",")
 
 colnames(mdd_drugs) <- c("STUDY_ID", paste0("Drug", 1:744))
 colnames(mdd_dates) <- c("STUDY_ID", paste0("Date", 1:744))
 
-filepath1 <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/3_DepressionCodes_210215_3.csv"
+filepath1 <- "~/3_DepressionCodes.csv"
 mdd_codes <- read.csv(filepath1)
-filepath2 <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/3_DepressionDates_210215_3.csv"
+filepath2 <- "~/3_DepressionDates.csv"
 mdd_codes_dates <- read.csv(filepath2, header=T, sep=",")
 
 colnames(mdd_codes) <- c("STUDY_ID", paste0("Code", 1:1488))
@@ -1538,7 +1538,7 @@ for (i in seq_along(1:dim(mdd_drugs)[1])){
 }
 
 # Write file that holds the prescribed drugs in order
-write.csv(mdd_drugs_ordered, file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/7_AntidepressantDrugs_Ordered_withtentatives_210427.csv")
+write.csv(mdd_drugs_ordered, file="~/7_AntidepressantDrugs_Ordered.csv")
 # Write file that holds the ordered prescription dates 
-write.csv(mdd_dates_ordered, file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/7_AntidepressantDates_Ordered_withtentatives_210427.csv")
+write.csv(mdd_dates_ordered, file="~/7_AntidepressantDates_Ordered.csv")
 
