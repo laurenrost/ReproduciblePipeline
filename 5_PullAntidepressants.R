@@ -5,15 +5,15 @@ require(lubridate)
 require("readxl")
 
 # Orders
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/EHR/R3_2027_ROST_MED_ORDERS_2020_12_14.csv"
+filepath <- "~/ORDERS.csv"
 w <- read.csv(filepath)
 
 # Fills
-#filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/EHR/R3_2027_ROST_MED_FILLS_2020_12_14.csv"
+#filepath <- "~/FILLS.csv"
 #v <- read.csv(filepath)
 
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/Final_R3_201005/Inclusion_Meds_R32027.v6.xlsx"
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/AntidepressantList/MasterDrugList_withtentatives_210420.xlsx"
+filepath <- "~/Inclusion_Meds.xlsx"
+filepath <- "~/MasterDrugList.xlsx"
 incl_meds_2 <- read_excel(filepath)
 incl_meds <- as.matrix(incl_meds)
 incl_meds <- toupper(paste0(incl_meds, "*"))
@@ -22,7 +22,7 @@ incl_meds <- incl_meds[-c(2, 5, 7, 12, 13, 20, 22, 24, 25, 26, 28, 30, 32, 33, 3
 incl_meds <- incl_meds[-which(as.numeric(checkdrugpresence[,2])==0)]
 
 # Pull STUDY_IDs that pass 2/30/180 rule
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/4_TwoThirty180_PassFail_210208.csv"
+filepath <- "~/4_TwoThirty180_PassFail.csv"
 eMERGE_STUDYIDs <- read.csv(filepath)
 eMERGE_STUDYIDs_2 <- eMERGE_STUDYIDs[(which(eMERGE_STUDYIDs[,2]==1)),1]
 
@@ -73,7 +73,7 @@ for (i in (2:(dim(drugs)[2]))){
   
   # Write file iteratively
   drugs_append <- drugs[,1:i]
-  write.csv(drugs_append,"~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/5_AntidepressantPresence_Fills_210617.csv", 
+  write.csv(drugs_append,"~/5_AntidepressantPresence.csv", 
             row.names = FALSE, 
             quote=F)
 }
