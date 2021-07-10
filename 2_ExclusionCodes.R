@@ -4,7 +4,7 @@
 
 require("readxl")
 # Insert file containing exclusion ICD-9 codes
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/Final_R3_201005/Exclusion_icd9codes.v4.xlsx"
+filepath <- "~/Exclusion_icd9codes.xlsx"
 excl_icd9 <- read_excel(filepath)
 excl_icd9 <- as.matrix(excl_icd9)
 excl_icd9[,1] <- as.numeric(excl_icd9[,1])
@@ -13,18 +13,18 @@ excl_icd9[which(is.na(excl_icd9[,1]))[1],1] <- "V17.0"
 excl_icd9[,1] <- paste0(excl_icd9[,1], "*")
 
 # Input file containing exclusion ICD-10 codes
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/Final_R3_201005/Exclusion_icd10codes.v4.xlsx"
+filepath <- "~/Exclusion_icd10codes.xlsx"
 excl_icd10 <- read_excel(filepath)
 excl_icd10 <- as.matrix(excl_icd10)
 excl_icd10[,1] <- paste0(excl_icd10[,1],"*")
 excl_icd10[,1] <- gsub("-", "", excl_icd10[,1])
 
 # Input Diagnosis table
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/EHR/R3_2027_ROST_DIAGNOSES_2020_12_14.csv"
+filepath <- "~/DIAGNOSES.csv"
 t <- read.csv(filepath)
 
 # Input inclusion code matrix
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/InclusionCodeResults_210201_3.csv"
+filepath <- "~/InclusionCodeResults.csv"
 eMERGE_STUDYIDs <- read.csv(filepath, header=T)
 
 # Remove STUDY IDs with less than 2 inclusion ICD-9/10 codes 
@@ -88,11 +88,9 @@ for (i in (2:(dim(excl_icd9_icd10)[2]))){
   
   # Write file iteratively
   excl_ppl_append <- excl_icd9_icd10[,1:i]
-  write.csv(incl_ppl_append,"~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/ExclusionCodeResults_21020.csv", 
+  write.csv(incl_ppl_append,"~/ExclusionCodeResults.csv", 
             row.names = FALSE, 
             #col.names=F, 
             quote=F,
             append=F)
 }
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/ExclusionCodeResults_21020.csv"
-check <- read.csv(filepath)
