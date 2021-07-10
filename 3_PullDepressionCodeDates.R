@@ -3,17 +3,17 @@ require(lubridate)
 require("readxl")
 
 # Input diagnoses file
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/EHR/R3_2027_ROST_DIAGNOSES_2020_12_14.csv"
+filepath <- "~/DIAGNOSES.csv"
 t <- read.csv(filepath)
 
 # Input inclusion icd-10 codes
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/Final_R3_201005/Inclusion_icd10codes.v3.xlsx"
+filepath <- "~/Inclusion_icd10codes.xlsx"
 icl_icd10 <- read_excel(filepath)
 icl_icd10 <- as.matrix(icl_icd10)
 icl_icd10 <- gsub("-", "*", icl_icd10)
 
 # Input inclusion icd-9 codes
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/Final_R3_201005/Inclusion_icd9codes.v3.xlsx"
+filepath <- "~/Inclusion_icd9codes.xlsx"
 icl_icd9 <- read_excel(filepath)
 icl_icd9 <- as.matrix(icl_icd9)
 icl_icd9[,1] <- paste0(icl_icd9[,1], "*")
@@ -24,7 +24,7 @@ icl_icd9_icd10 <- c(icl_icd9[,1], icl_icd10[,1])
 
 
 # Input inclusion code matrix (the output of 1_InclusionCodes.R)
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/InclusionCodeResults_210201_3.csv"
+filepath <- "~/InclusionCodeResults.csv"
 eMERGE_STUDYIDs <- read.csv(filepath, header=T)
 
 # Remove STUDY IDs with less than 2 inclusion ICD-9/10 codes 
@@ -3060,14 +3060,14 @@ for (i in (1:dim(eMERGE_STUDYIDs_2)[1])){
   if (i==1){
     # Write the file with depression ICD-9/-10 dates for patients
     write.table(mdd_codes_dates_append,  
-                file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/3_DepressionDates_210223_4.csv",
+                file="~/3_DepressionDates.csv",
                 sep=",",
                 append=F,
                 col.names = T,
                 row.names=F)
     # Write the file with depression ICD-9/-10 codes for patients
     write.table(mdd_codes_append,  
-                file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/3_DepressionCodes_210223_4.csv",
+                file="~/3_DepressionCodes.csv",
                 sep=",",
                 append=F,
                 col.names = T,
@@ -3075,14 +3075,14 @@ for (i in (1:dim(eMERGE_STUDYIDs_2)[1])){
   } else {
     # Append to the file with depression ICD-9/-10 dates for patients
     write.table(mdd_codes_dates_append,  
-                file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/3_DepressionDates_210223_4.csv", 
+                file="~/3_DepressionDates.csv", 
                 append = T, 
                 sep=',', 
                 row.names=F, 
                 col.names=F )
     # Append to the file with depression ICD-9/-10 codes for patients
     write.table(mdd_codes_append,  
-                file="~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/3_DepressionCodes_210223_4.csv", 
+                file="~/3_DepressionCodes.csv", 
                 append = T, 
                 sep=',', 
                 row.names=F, 
