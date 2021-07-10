@@ -2,7 +2,7 @@
 # patients' EHR record.
 
 # Read in diagnosis file
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/EHR/R3_2027_ROST_DIAGNOSES_2020_12_14.csv"
+filepath <- "~/DIAGNOSES.csv"
 d <- read.csv(filepath)
 
 # Make a table of counts of all diagnoses across patients
@@ -13,7 +13,7 @@ dx_table <- dx_table[rev(order(dx_table))]
 top_dx <- names(dx_table[1:200])
 
 # Pull STUDY_IDs that pass 2/30/180 rule
-filepath <- "~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/4_TwoThirty180_PassFail_210208.csv"
+filepath <- "~/4_TwoThirty180_PassFail.csv"
 eMERGE_STUDYIDs <- read.csv(filepath)
 eMERGE_STUDYIDs_2 <- eMERGE_STUDYIDs[(which(eMERGE_STUDYIDs[,2]==1)),1]
 
@@ -71,7 +71,7 @@ for (i in (2:(dim(dxs)[2]))){
   
   # Write file iteratively
   dxs_append <- dxs[,1:i]
-  write.csv(dxs_append,"~/Desktop/DBMI/Research/Pharmacogenomics/Data/PipelineResults/5_DiagnosisPresence_210619.csv", 
+  write.csv(dxs_append,"~/5_DiagnosisPresence.csv", 
             row.names = FALSE, 
             quote=F)
 }
